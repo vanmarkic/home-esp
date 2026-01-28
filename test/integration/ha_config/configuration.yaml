@@ -1,0 +1,16 @@
+# Home Assistant Test Configuration
+
+homeassistant:
+  name: Test Home
+  unit_system: metric
+  time_zone: UTC
+
+# Enable API for testing
+api:
+
+# Enable logging
+logger:
+  default: info
+
+# ESPHome integration will be added manually
+# when the host device connects
