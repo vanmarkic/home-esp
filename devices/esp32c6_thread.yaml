@@ -1,0 +1,82 @@
+# ESPHome ESP32-C6 Thread Device
+# For battery-powered sensors over Thread mesh network
+# Requires: Thread border router (e.g., Home Assistant Yellow, Apple TV, Google Nest Hub)
+
+esphome:
+  name: esp32c6-thread-sensor
+  friendly_name: Thread Sensor
+
+esp32:
+  board: esp32-c6-devkitc-1
+  framework:
+    type: esp-idf
+    version: recommended
+
+# Thread networking (replaces WiFi)
+openthread:
+  # Device will auto-join Thread network via border router
+  # No SSID/password needed - uses Thread commissioning
+
+# Logging (reduced for battery life)
+logger:
+  level: INFO
+
+# Home Assistant API (works over Thread just like WiFi)
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+# OTA updates (works over Thread)
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# Deep sleep for battery life
+deep_sleep:
+  run_duration: 10s      # Stay awake 10 seconds
+  sleep_duration: 5min   # Sleep 5 minutes between readings
+
+# Load our custom components
+external_components:
+  - source:
+      type: local
+      path: ../components
+
+# Example Sensor Component
+# Perfect for battery-powered Thread devices
+example_sensor:
+  id: temp_sensor
+  offset: 0.0
+  min_temperature: -40.0
+  max_temperature: 85.0
+  update_interval: 5min  # Match deep sleep cycle
+
+sensor:
+  - platform: example_sensor
+    id: temp_sensor
+    name: "Temperature"
+
+# Example: Battery voltage monitoring
+# sensor:
+#   - platform: adc
+#     pin: GPIO0
+#     name: "Battery Voltage"
+#     update_interval: 5min
+#     attenuation: 11db
+#     filters:
+#       - multiply: 2  # Voltage divider factor
+
+# Binary sensor example (motion/door)
+# Wakes device from deep sleep on GPIO trigger
+# binary_sensor:
+#   - platform: gpio
+#     pin:
+#       number: GPIO9
+#       mode: INPUT_PULLUP
+#     name: "Motion"
+#     device_class: motion
+#     on_press:
+#       then:
+#         - deep_sleep.prevent: deep_sleep_1
+#         - delay: 30s
+#         - deep_sleep.allow: deep_sleep_1
