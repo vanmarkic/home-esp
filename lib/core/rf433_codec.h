@@ -20,14 +20,24 @@ class RF433Codec : public IProtocolCodec {
 
   /// Timing configuration for the protocol
   struct TimingConfig {
-    uint16_t pulse_length_us = 350;    // Base pulse length in microseconds
-    uint8_t sync_high_pulses = 1;      // Number of high pulses in sync
-    uint8_t sync_low_pulses = 31;      // Number of low pulses in sync
-    uint8_t zero_high_pulses = 1;      // High pulses for '0' bit
-    uint8_t zero_low_pulses = 3;       // Low pulses for '0' bit
-    uint8_t one_high_pulses = 3;       // High pulses for '1' bit
-    uint8_t one_low_pulses = 1;        // Low pulses for '1' bit
-    uint8_t tolerance_percent = 25;    // Timing tolerance
+    uint16_t pulse_length_us;    // Base pulse length in microseconds
+    uint8_t sync_high_pulses;    // Number of high pulses in sync
+    uint8_t sync_low_pulses;     // Number of low pulses in sync
+    uint8_t zero_high_pulses;    // High pulses for '0' bit
+    uint8_t zero_low_pulses;     // Low pulses for '0' bit
+    uint8_t one_high_pulses;     // High pulses for '1' bit
+    uint8_t one_low_pulses;      // Low pulses for '1' bit
+    uint8_t tolerance_percent;   // Timing tolerance
+
+    TimingConfig()
+        : pulse_length_us(350),
+          sync_high_pulses(1),
+          sync_low_pulses(31),
+          zero_high_pulses(1),
+          zero_low_pulses(3),
+          one_high_pulses(3),
+          one_low_pulses(1),
+          tolerance_percent(25) {}
   };
 
   explicit RF433Codec(TimingConfig config = TimingConfig()) : config_(config) {}
