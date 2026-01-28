@@ -32,7 +32,7 @@ class RF433Codec : public IProtocolCodec {
     TimingConfig() = default;
   };
 
-  explicit RF433Codec(TimingConfig config = {}) : config_(config) {}
+  explicit RF433Codec(TimingConfig config = TimingConfig{}) : config_(config) {}
 
   bool decode(const uint8_t* data, size_t len, DecodedMessage& out) override {
     // Simplified decoding: expects raw pulse timings as uint16_t pairs

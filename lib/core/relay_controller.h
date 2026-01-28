@@ -21,7 +21,7 @@ class RelayController {
     Config() = default;
   };
 
-  explicit RelayController(ICommandHandler* handler, Config config = {})
+  explicit RelayController(ICommandHandler* handler, Config config = Config{})
       : handler_(handler), config_(config) {}
 
   /// Request to turn on

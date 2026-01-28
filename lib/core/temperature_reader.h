@@ -23,7 +23,7 @@ class TemperatureReader {
     Config() = default;
   };
 
-  explicit TemperatureReader(ISensorPublisher* publisher, Config config = {})
+  explicit TemperatureReader(ISensorPublisher* publisher, Config config = Config{})
       : publisher_(publisher), config_(config) {}
 
   /// Process a raw ADC reading
