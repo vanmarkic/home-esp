@@ -41,8 +41,9 @@ async def to_code(config):
     cg.add(var.set_min_temperature(config[CONF_MIN_TEMP]))
     cg.add(var.set_max_temperature(config[CONF_MAX_TEMP]))
 
-    # Add include path for lib/core headers
+    # Add include paths for lib/ headers (core/* includes) and lib/core/ headers (interfaces/* includes)
     lib_path = os.path.abspath(
         os.path.join(os.path.dirname(__file__), "..", "..", "lib")
     )
     cg.add_build_flag(f"-I{lib_path}")
+    cg.add_build_flag(f"-I{lib_path}/core")

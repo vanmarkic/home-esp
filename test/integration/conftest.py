@@ -21,7 +21,7 @@ def docker_compose_up():
 
     # Start services
     subprocess.run(
-        ["docker-compose", "up", "-d"],
+        ["docker", "compose", "up", "-d"],
         cwd=integration_dir,
         check=True,
     )
@@ -43,7 +43,7 @@ def docker_compose_up():
 
     # Cleanup
     subprocess.run(
-        ["docker-compose", "down", "-v"],
+        ["docker", "compose", "down", "-v"],
         cwd=integration_dir,
         check=True,
     )

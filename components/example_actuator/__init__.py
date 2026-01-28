@@ -43,8 +43,9 @@ async def to_code(config):
     cg.add(var.set_min_off_time(config[CONF_MIN_OFF_TIME]))
     cg.add(var.set_inverted(config[CONF_INVERTED]))
 
-    # Add include path for lib/core headers
+    # Add include paths for lib/ headers (core/* includes) and lib/core/ headers (interfaces/* includes)
     lib_path = os.path.abspath(
         os.path.join(os.path.dirname(__file__), "..", "..", "lib")
     )
     cg.add_build_flag(f"-I{lib_path}")
+    cg.add_build_flag(f"-I{lib_path}/core")
