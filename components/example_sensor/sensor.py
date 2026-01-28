@@ -10,7 +10,7 @@ from esphome.const import (
     UNIT_CELSIUS,
 )
 
-from . import ExampleSensorComponent, home_esp_ns
+from . import ExampleSensorComponent
 
 DEPENDENCIES = ["example_sensor"]
 

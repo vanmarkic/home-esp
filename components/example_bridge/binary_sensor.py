@@ -5,7 +5,7 @@ import esphome.config_validation as cv
 from esphome.components import binary_sensor
 from esphome.const import CONF_ID, DEVICE_CLASS_MOTION
 
-from . import ExampleBridgeComponent, home_esp_ns
+from . import ExampleBridgeComponent
 
 DEPENDENCIES = ["example_bridge"]
 

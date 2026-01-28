@@ -57,11 +57,16 @@ TEST_F(TemperatureReaderTest, PublishesValidHighTemperature) {
 }
 
 TEST_F(TemperatureReaderTest, PublishesUnavailableForOutOfRangeHigh) {
+  // Simulate a scenario where ADC reading exceeds expected range
+  // by configuring a lower ADC resolution than the actual reading
   TemperatureReader::Config config;
-  config.max_valid_temp = 50.0f;  // Lower max for easier testing
+  config.adc_resolution = 3000;  // Expect max ADC value of 3000
+  // With default temp range (-40 to 85°C) and voltage (0-3.3V):
+  // ADC 4095 produces: voltage = (4095/3000) * 3.3 = 4.5V
+  // temp = -40 + (4.5 - 0) * 125 / 3.3 = -40 + 170.45 = 130.45°C
+  // This exceeds max_valid_temp (85°C) and should trigger unavailable
   TemperatureReader reader(&publisher_, config);
 
-  // Max ADC value - will produce temp above max_valid_temp
   reader.process_raw_reading(4095);
 
   EXPECT_EQ(publisher_.get_publish_count(), 0);
