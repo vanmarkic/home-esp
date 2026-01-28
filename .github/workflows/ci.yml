@@ -111,7 +111,7 @@ jobs:
         run: black --check components/
 
       - name: Check Python imports (isort)
-        run: isort --check-only components/
+        run: isort --check-only --profile black components/
 
       - name: Lint Python (flake8)
         run: flake8 components/ --max-line-length=100 --ignore=E501

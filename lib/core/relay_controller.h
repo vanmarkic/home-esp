@@ -13,15 +13,13 @@ class RelayController {
  public:
   /// Configuration for relay behavior
   struct Config {
-    uint32_t min_on_time_ms{0};     // Minimum time to stay on (protection)
-    uint32_t min_off_time_ms{0};    // Minimum time to stay off (protection)
-    bool inverted{false};           // Invert output logic
-    bool restore_state{false};      // Restore state on boot
-
-    Config() = default;
+    uint32_t min_on_time_ms = 0;     // Minimum time to stay on (protection)
+    uint32_t min_off_time_ms = 0;    // Minimum time to stay off (protection)
+    bool inverted = false;           // Invert output logic
+    bool restore_state = false;      // Restore state on boot
   };
 
-  explicit RelayController(ICommandHandler* handler, Config config = Config{})
+  explicit RelayController(ICommandHandler* handler, Config config = Config())
       : handler_(handler), config_(config) {}
 
   /// Request to turn on

@@ -13,17 +13,15 @@ class TemperatureReader {
  public:
   /// Configuration for temperature conversion
   struct Config {
-    float min_valid_temp{-40.0f};   // Minimum valid temperature (Celsius)
-    float max_valid_temp{85.0f};    // Maximum valid temperature (Celsius)
-    float adc_min_voltage{0.0f};    // ADC voltage at min temp
-    float adc_max_voltage{3.3f};    // ADC voltage at max temp
-    uint16_t adc_resolution{4095};  // ADC max value (12-bit = 4095)
-    float offset{0.0f};             // Calibration offset
-
-    Config() = default;
+    float min_valid_temp = -40.0f;   // Minimum valid temperature (Celsius)
+    float max_valid_temp = 85.0f;    // Maximum valid temperature (Celsius)
+    float adc_min_voltage = 0.0f;    // ADC voltage at min temp
+    float adc_max_voltage = 3.3f;    // ADC voltage at max temp
+    uint16_t adc_resolution = 4095;  // ADC max value (12-bit = 4095)
+    float offset = 0.0f;             // Calibration offset
   };
 
-  explicit TemperatureReader(ISensorPublisher* publisher, Config config = Config{})
+  explicit TemperatureReader(ISensorPublisher* publisher, Config config = Config())
       : publisher_(publisher), config_(config) {}
 
   /// Process a raw ADC reading

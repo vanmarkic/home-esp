@@ -20,19 +20,17 @@ class RF433Codec : public IProtocolCodec {
 
   /// Timing configuration for the protocol
   struct TimingConfig {
-    uint16_t pulse_length_us{350};    // Base pulse length in microseconds
-    uint8_t sync_high_pulses{1};      // Number of high pulses in sync
-    uint8_t sync_low_pulses{31};      // Number of low pulses in sync
-    uint8_t zero_high_pulses{1};      // High pulses for '0' bit
-    uint8_t zero_low_pulses{3};       // Low pulses for '0' bit
-    uint8_t one_high_pulses{3};       // High pulses for '1' bit
-    uint8_t one_low_pulses{1};        // Low pulses for '1' bit
-    uint8_t tolerance_percent{25};    // Timing tolerance
-
-    TimingConfig() = default;
+    uint16_t pulse_length_us = 350;    // Base pulse length in microseconds
+    uint8_t sync_high_pulses = 1;      // Number of high pulses in sync
+    uint8_t sync_low_pulses = 31;      // Number of low pulses in sync
+    uint8_t zero_high_pulses = 1;      // High pulses for '0' bit
+    uint8_t zero_low_pulses = 3;       // Low pulses for '0' bit
+    uint8_t one_high_pulses = 3;       // High pulses for '1' bit
+    uint8_t one_low_pulses = 1;        // Low pulses for '1' bit
+    uint8_t tolerance_percent = 25;    // Timing tolerance
   };
 
-  explicit RF433Codec(TimingConfig config = TimingConfig{}) : config_(config) {}
+  explicit RF433Codec(TimingConfig config = TimingConfig()) : config_(config) {}
 
   bool decode(const uint8_t* data, size_t len, DecodedMessage& out) override {
     // Simplified decoding: expects raw pulse timings as uint16_t pairs
