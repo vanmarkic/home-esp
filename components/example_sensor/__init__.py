@@ -1,5 +1,7 @@
 """ESPHome Example Sensor Component."""
 
+import os
+
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.const import CONF_ID
@@ -38,3 +40,9 @@ async def to_code(config):
     cg.add(var.set_offset(config[CONF_OFFSET]))
     cg.add(var.set_min_temperature(config[CONF_MIN_TEMP]))
     cg.add(var.set_max_temperature(config[CONF_MAX_TEMP]))
+
+    # Add include path for lib/core headers
+    lib_path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "lib")
+    )
+    cg.add_build_flag(f"-I{lib_path}")

@@ -1,5 +1,7 @@
 """ESPHome Example Bridge Component (RF433)."""
 
+import os
+
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.const import CONF_ID
@@ -36,3 +38,9 @@ async def to_code(config):
     cg.add(var.set_pulse_length(config[CONF_PULSE_LENGTH]))
     cg.add(var.set_tolerance(config[CONF_TOLERANCE]))
     cg.add(var.set_motion_code(config[CONF_MOTION_CODE]))
+
+    # Add include path for lib/core headers
+    lib_path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "lib")
+    )
+    cg.add_build_flag(f"-I{lib_path}")

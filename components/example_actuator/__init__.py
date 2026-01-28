@@ -1,5 +1,7 @@
 """ESPHome Example Actuator Component."""
 
+import os
+
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.const import CONF_ID
@@ -40,3 +42,9 @@ async def to_code(config):
     cg.add(var.set_min_on_time(config[CONF_MIN_ON_TIME]))
     cg.add(var.set_min_off_time(config[CONF_MIN_OFF_TIME]))
     cg.add(var.set_inverted(config[CONF_INVERTED]))
+
+    # Add include path for lib/core headers
+    lib_path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "lib")
+    )
+    cg.add_build_flag(f"-I{lib_path}")
