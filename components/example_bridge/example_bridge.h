@@ -71,7 +71,7 @@ class ExampleBridgeComponent : public esphome::Component {
     ESP_LOGCONFIG(BRIDGE_TAG, "  Pulse length: %u us", pulse_length_);
     ESP_LOGCONFIG(BRIDGE_TAG, "  Tolerance: %u%%", tolerance_);
     ESP_LOGCONFIG(BRIDGE_TAG, "  Motion code: 0x%08X", motion_code_);
-    LOG_BINARY_SENSOR("  ", "Motion", motion_sensor_);
+    esphome::binary_sensor::log_binary_sensor(BRIDGE_TAG, "  ", "Motion", motion_sensor_);
   }
 
   float get_setup_priority() const override {

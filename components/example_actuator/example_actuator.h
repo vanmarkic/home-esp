@@ -58,7 +58,7 @@ class ExampleSwitch : public esphome::switch_::Switch, public esphome::Component
   void setup() override {}
 
   void dump_config() override {
-    LOG_SWITCH("  ", "Switch", this);
+    esphome::switch_::log_switch(ACTUATOR_TAG, "  ", "Switch", this);
   }
 
  protected:
