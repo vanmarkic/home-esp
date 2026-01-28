@@ -1,0 +1,52 @@
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Build artifacts
+.build/
+build/
+*.o
+*.a
+*.so
+*.dylib
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.env
+*.egg-info/
+
+# ESPHome
+.esphome/
+secrets.yaml
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+*.gcov
+*.gcda
+*.gcno
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Credentials (never commit!)
+*.pem
+*.key
+credentials.json
