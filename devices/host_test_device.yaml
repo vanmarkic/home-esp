@@ -1,0 +1,62 @@
+# ESPHome Host Platform Test Device
+# Run with: esphome run devices/host_test_device.yaml
+
+esphome:
+  name: host-test-device
+  friendly_name: Host Test Device
+
+# Host platform - runs on your Mac/Linux
+host:
+  mac_address: "06:35:69:ab:f6:79"
+
+# Logging
+logger:
+  level: DEBUG
+
+# Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+# Load our custom components
+external_components:
+  - source:
+      type: local
+      path: ../components
+
+# Example Sensor Component
+example_sensor:
+  id: temp_sensor
+  offset: 0.0
+  min_temperature: -40.0
+  max_temperature: 85.0
+  update_interval: 10s
+
+sensor:
+  - platform: example_sensor
+    id: temp_sensor
+    name: "Test Temperature"
+
+# Example Actuator Component
+example_actuator:
+  id: relay
+  min_on_time: 1s
+  min_off_time: 500ms
+  inverted: false
+
+switch:
+  - platform: example_actuator
+    id: relay
+    name: "Test Relay"
+
+# Example Bridge Component
+example_bridge:
+  id: rf_bridge
+  pulse_length: 350
+  tolerance: 25
+  motion_code: 0x123456
+
+binary_sensor:
+  - platform: example_bridge
+    id: rf_bridge
+    name: "Test Motion"

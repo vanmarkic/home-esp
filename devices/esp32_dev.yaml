@@ -1,0 +1,80 @@
+# ESPHome ESP32 Development Device
+# Flash with: esphome run devices/esp32_dev.yaml
+
+esphome:
+  name: esp32-dev-device
+  friendly_name: ESP32 Dev Device
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# WiFi configuration
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "ESP32-Dev-Fallback"
+    password: !secret ap_password
+
+captive_portal:
+
+# Logging
+logger:
+  level: DEBUG
+
+# Home Assistant API
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+# OTA updates
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# Load our custom components
+external_components:
+  - source:
+      type: local
+      path: ../components
+
+# Example Sensor Component
+example_sensor:
+  id: temp_sensor
+  offset: 0.0
+  min_temperature: -40.0
+  max_temperature: 85.0
+  update_interval: 30s
+
+sensor:
+  - platform: example_sensor
+    id: temp_sensor
+    name: "Temperature"
+
+# Example Actuator Component
+example_actuator:
+  id: relay
+  min_on_time: 1s
+  min_off_time: 500ms
+  inverted: false
+
+switch:
+  - platform: example_actuator
+    id: relay
+    name: "Relay"
+
+# Example Bridge Component
+example_bridge:
+  id: rf_bridge
+  pulse_length: 350
+  tolerance: 25
+  motion_code: 0x123456
+
+binary_sensor:
+  - platform: example_bridge
+    id: rf_bridge
+    name: "Motion Sensor"
