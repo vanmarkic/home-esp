@@ -1,4 +1,5 @@
 """ESPHome Example Bridge Component (RF433)."""
+
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.const import CONF_ID
@@ -9,9 +10,7 @@ AUTO_LOAD = ["binary_sensor"]
 
 # Namespace
 home_esp_ns = cg.esphome_ns.namespace("home_esp")
-ExampleBridgeComponent = home_esp_ns.class_(
-    "ExampleBridgeComponent", cg.Component
-)
+ExampleBridgeComponent = home_esp_ns.class_("ExampleBridgeComponent", cg.Component)
 
 # Configuration keys
 CONF_PULSE_LENGTH = "pulse_length"

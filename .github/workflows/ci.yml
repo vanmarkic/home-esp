@@ -50,7 +50,7 @@ jobs:
           wifi_ssid: "test-ssid"
           wifi_password: "test-password"
           ap_password: "test-ap-pass"
-          api_encryption_key: "dGVzdC1lbmNyeXB0aW9uLWtleS0zMi1ieXRlcyEh"
+          api_encryption_key: "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
           ota_password: "test-ota-pass"
           EOF
 
@@ -83,7 +83,7 @@ jobs:
           wifi_ssid: "test-ssid"
           wifi_password: "test-password"
           ap_password: "test-ap-pass"
-          api_encryption_key: "dGVzdC1lbmNyeXB0aW9uLWtleS0zMi1ieXRlcyEh"
+          api_encryption_key: "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
           ota_password: "test-ota-pass"
           EOF
 
@@ -143,7 +143,7 @@ jobs:
           wifi_ssid: "test-ssid"
           wifi_password: "test-password"
           ap_password: "test-ap-pass"
-          api_encryption_key: "dGVzdC1lbmNyeXB0aW9uLWtleS0zMi1ieXRlcyEh"
+          api_encryption_key: "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE="
           ota_password: "test-ota-pass"
           EOF
 

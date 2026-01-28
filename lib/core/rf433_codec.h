@@ -28,6 +28,8 @@ class RF433Codec : public IProtocolCodec {
     uint8_t one_high_pulses{3};       // High pulses for '1' bit
     uint8_t one_low_pulses{1};        // Low pulses for '1' bit
     uint8_t tolerance_percent{25};    // Timing tolerance
+
+    TimingConfig() = default;
   };
 
   explicit RF433Codec(TimingConfig config = {}) : config_(config) {}

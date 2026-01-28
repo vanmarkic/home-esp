@@ -1,4 +1,5 @@
 """ESPHome Example Actuator Component."""
+
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.const import CONF_ID
@@ -9,9 +10,7 @@ AUTO_LOAD = ["switch"]
 
 # Namespace
 home_esp_ns = cg.esphome_ns.namespace("home_esp")
-ExampleActuatorComponent = home_esp_ns.class_(
-    "ExampleActuatorComponent", cg.Component
-)
+ExampleActuatorComponent = home_esp_ns.class_("ExampleActuatorComponent", cg.Component)
 
 # Configuration keys
 CONF_MIN_ON_TIME = "min_on_time"
@@ -22,8 +21,12 @@ CONF_INVERTED = "inverted"
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(): cv.declare_id(ExampleActuatorComponent),
-        cv.Optional(CONF_MIN_ON_TIME, default="0s"): cv.positive_time_period_milliseconds,
-        cv.Optional(CONF_MIN_OFF_TIME, default="0s"): cv.positive_time_period_milliseconds,
+        cv.Optional(
+            CONF_MIN_ON_TIME, default="0s"
+        ): cv.positive_time_period_milliseconds,
+        cv.Optional(
+            CONF_MIN_OFF_TIME, default="0s"
+        ): cv.positive_time_period_milliseconds,
         cv.Optional(CONF_INVERTED, default=False): cv.boolean,
     }
 ).extend(cv.COMPONENT_SCHEMA)

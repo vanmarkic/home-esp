@@ -19,6 +19,8 @@ class TemperatureReader {
     float adc_max_voltage{3.3f};    // ADC voltage at max temp
     uint16_t adc_resolution{4095};  // ADC max value (12-bit = 4095)
     float offset{0.0f};             // Calibration offset
+
+    Config() = default;
   };
 
   explicit TemperatureReader(ISensorPublisher* publisher, Config config = {})

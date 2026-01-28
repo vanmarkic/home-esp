@@ -17,6 +17,8 @@ class RelayController {
     uint32_t min_off_time_ms{0};    // Minimum time to stay off (protection)
     bool inverted{false};           // Invert output logic
     bool restore_state{false};      // Restore state on boot
+
+    Config() = default;
   };
 
   explicit RelayController(ICommandHandler* handler, Config config = {})
