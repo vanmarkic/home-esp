@@ -1,8 +1,30 @@
 #pragma once
 
-// RelayController - Example business logic for actuators
-// Pure C++ with no ESPHome dependencies
-// Controls a relay with optional timing constraints
+/// @file relay_controller.h
+/// @brief RelayController - Business logic for actuator control
+///
+/// Pure C++ implementation with no ESPHome dependencies, enabling
+/// unit testing on native platforms without embedded hardware.
+///
+/// Features:
+/// - Minimum on/off time constraints (compressor protection, debounce)
+/// - Output inversion for active-low relays
+/// - State restoration support for power-loss recovery
+///
+/// @example Basic usage:
+/// @code
+///   RelayController::Config config;
+///   config.min_on_time_ms = 5000;  // Compressor protection
+///   RelayController controller(&my_handler, config);
+///
+///   controller.turn_on();
+///   // Later in loop:
+///   controller.update(millis());
+///   controller.turn_off();  // May be blocked if min time not elapsed
+/// @endcode
+///
+/// @note Timing uses unsigned 32-bit arithmetic which correctly handles
+///       millis() overflow (~49.7 days).
 
 #include "interfaces/i_command_handler.h"
 #include <cstdint>

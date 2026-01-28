@@ -1,8 +1,27 @@
 #pragma once
 
-// ICommandHandler Interface
-// Abstraction for handling actuator commands (switches, outputs)
-// Allows business logic to be tested without ESPHome dependencies
+/// @file i_command_handler.h
+/// @brief Interface for handling actuator commands (switches, outputs)
+///
+/// This interface abstracts the hardware/platform-specific command execution,
+/// allowing business logic to be tested without ESPHome dependencies.
+///
+/// ## Implementations:
+/// - **ESPHomeSwitchAdapter**: Bridges to ESPHome switch component
+/// - **MockCommandHandler**: Test double for unit testing
+///
+/// ## Usage Pattern:
+/// @code
+///   // Production code
+///   ESPHomeSwitchAdapter adapter(esphome_switch);
+///   RelayController controller(&adapter, config);
+///
+///   // Test code
+///   MockCommandHandler mock;
+///   RelayController controller(&mock, config);
+///   controller.turn_on();
+///   EXPECT_TRUE(mock.get_state());
+/// @endcode
 
 namespace home_esp {
 

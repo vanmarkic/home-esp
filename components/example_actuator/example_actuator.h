@@ -1,7 +1,35 @@
 #pragma once
 
-// ExampleActuatorComponent
-// ESPHome component that wraps RelayController business logic
+/// @file example_actuator.h
+/// @brief ESPHome component that wraps RelayController business logic
+///
+/// This component demonstrates the separation between ESPHome platform
+/// bindings and testable C++ business logic. The RelayController handles
+/// all state management and timing constraints, while this component
+/// provides the ESPHome lifecycle integration.
+///
+/// ## Architecture
+/// ```
+/// Home Assistant <-> ESPHome Switch <-> ExampleActuatorComponent
+///                                               |
+///                                        RelayController (pure C++)
+///                                               |
+///                                        ESPHomeSwitchAdapter
+/// ```
+///
+/// ## Configuration (YAML):
+/// @code{.yaml}
+/// switch:
+///   - platform: example_actuator
+///     name: "My Relay"
+///     min_on_time: 5s    # Optional: minimum time to stay on
+///     min_off_time: 10s  # Optional: minimum time to stay off
+///     inverted: false    # Optional: invert output logic
+/// @endcode
+///
+/// ## Testing
+/// The RelayController can be tested independently using MockCommandHandler,
+/// enabling fast native unit tests without ESPHome dependencies.
 
 #include "esphome/core/component.h"
 #include "esphome/components/switch/switch.h"
@@ -95,9 +123,7 @@ inline void ExampleActuatorComponent::setup() {
 
 inline void ExampleActuatorComponent::loop() {
   if (controller_ != nullptr) {
-    // Update timing - in real ESPHome, use millis()
-    // For now, we'll use a placeholder
-    controller_->update(0);  // TODO: Use actual millis()
+    controller_->update(millis());
   }
 }
 
