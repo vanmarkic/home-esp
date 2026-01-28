@@ -4,7 +4,6 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import sensor
 from esphome.const import (
-    CONF_ID,
     DEVICE_CLASS_TEMPERATURE,
     STATE_CLASS_MEASUREMENT,
     UNIT_CELSIUS,
@@ -14,6 +13,9 @@ from . import ExampleSensorComponent
 
 DEPENDENCIES = ["example_sensor"]
 
+# Parent component ID key (separate from entity ID)
+CONF_EXAMPLE_SENSOR_ID = "example_sensor_id"
+
 # Configuration schema for the sensor platform
 CONFIG_SCHEMA = sensor.sensor_schema(
     unit_of_measurement=UNIT_CELSIUS,
@@ -22,13 +24,13 @@ CONFIG_SCHEMA = sensor.sensor_schema(
     state_class=STATE_CLASS_MEASUREMENT,
 ).extend(
     {
-        cv.GenerateID(): cv.use_id(ExampleSensorComponent),
+        cv.GenerateID(CONF_EXAMPLE_SENSOR_ID): cv.use_id(ExampleSensorComponent),
     }
 )
 
 
 async def to_code(config):
     """Generate C++ code for the sensor platform."""
-    parent = await cg.get_variable(config[CONF_ID])
+    parent = await cg.get_variable(config[CONF_EXAMPLE_SENSOR_ID])
     sens = await sensor.new_sensor(config)
     cg.add(parent.set_sensor(sens))

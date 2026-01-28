@@ -52,7 +52,7 @@ example_sensor:
 
 sensor:
   - platform: example_sensor
-    id: temp_sensor_reading
+    example_sensor_id: temp_sensor
     name: "Temperature"
 
 # Example Actuator Component
@@ -64,7 +64,7 @@ example_actuator:
 
 switch:
   - platform: example_actuator
-    id: relay_switch
+    example_actuator_id: relay
     name: "Relay"
 
 # Example Bridge Component
@@ -76,5 +76,5 @@ example_bridge:
 
 binary_sensor:
   - platform: example_bridge
-    id: motion_detector
+    example_bridge_id: rf_bridge
     name: "Motion Sensor"
